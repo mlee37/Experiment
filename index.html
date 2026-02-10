@@ -1,0 +1,237 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wyoming Naturalist Program Chapters</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.33/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.33/"></script> 
+  <script src="jquery-1.11.1.min.js"></script>
+
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Container for map + sidebar */
+    .container {
+      display: flex;
+      flex-direction: row-reverse; /* sidebar right of map */
+      height: 100vh;       /* full viewport height */
+    }
+
+    /* Map styling */
+    #map {
+      flex: 1;             /* map fills remaining space */
+      min-width: 0;        /* prevents overflow */
+    }
+
+    /* Sidebar styling */
+    .sidebar {
+      width: 350px;        /* fixed width on large screens */
+      max-width: 100%;
+      overflow-y: auto;    /* scroll if content exceeds height */
+      padding: 10px;
+      background-color: #f9f9f9;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Collapsible button styles */
+    .collapsible {
+      background-color: #e97321;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      margin-top: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+
+    .active, .collapsible:hover {
+      background-color: #555;
+    }
+
+    .collapsible:after {
+      content: '\002B';
+      color: white;
+      font-weight: bold;
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    .content {
+      padding: 0 18px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      background-color: #f1f1f1;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 800px) {
+      .container {
+        flex-direction: column; /* stack map above sidebar */
+      }
+
+      .sidebar {
+        width: 100%;           /* full width below map */
+        height: auto;
+        box-shadow: none;
+      }
+
+      #map {
+        height: 60vh;          /* smaller map height on mobile */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Map -->
+    <div id="map" class="map"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Wyoming Naturalist Program Chapters</h2>
+      <a href="contactlist.xlsx" target="_blank" rel="noopener noreferrer">Download Chapter Contact List</a>
+
+      <button class="collapsible" style="background-color:#8dd3c7;">Absaroka Chapter</button>
+      <div class="content"><p>
+        Kathy Lichtendahl, kathylich@yahoo.com <br>
+        Kia Trout, kiatrout@gmail.com <br>
+        Becky Moore, beckymoorewv@gmail.com
+      </p></div>
+
+      <button class="collapsible" style="background-color:#ffffb3;">Bighorn Chapter</button>
+      <div class="content"><p>
+        Kris Korfanta, krisk@vcn.com <br>
+        Julie Rieder, julie.rieder@science-kids.org <br>
+        Micah Most, mmost@uwyo.edu 
+      </p></div>
+
+      <button class="collapsible" style="background-color:#bebada">Devils Tower Chapter</button>
+      <div class="content"><p>Colby Newton, colby.lee.newton@gmail.com</p></div>
+
+      <button class="collapsible" style="background-color:#fb8072">Fossil Basin Chapter</button>
+      <div class="content"><p>Carol Havlik, wind_mosquitoes@yahoo.com</p></div>
+
+      <button class="collapsible" style="background-color:#80b1d3">Great Divide Chapter</button>
+      <div class="content"><p>
+        Tyrell Perry, tyrelllukeperry88@gmail.com <br>
+        Camille Scott, 14scott.cs@gmail.com
+      </p></div>
+
+      <button class="collapsible" style="background-color:#fdb462">Gros Ventre Chapter</button>
+      <div class="content"><p>
+        Meredith Taylor, metaylor@wyoming.com <br>
+        Kamryn Kozisek, kamrynk2019@gmail.com <br>
+        Emily Lucas, emily@tetonexcursions.com <br>
+        Noah Chutz, nchutz@gmail.com <br>
+        Bari Bucholz, bari@astoriapark.org <br>
+        Jill Brigham, jill.brigham@tetonscience.org <br>
+        Audrey Fanjoy, 	audfanjoy@hotmail.com <br>
+        Jordan Epstein, epsteinaviation@gmail.com <br>
+        Drew Overholser, drewracer11@gmail.com <br>
+        Charlotte Cadow, charlotte.cadow@gmail.com <br>
+        Grace Lemen, glemen93@gmail.com 
+      </p></div>
+
+      <button class="collapsible" style="background-color:#b3de69">Platte Chapter</button>
+      <div class="content"><p>
+        Sarah Repshire, sarah.a.lane@gmail.com <br>
+        Bonnie Long, bonnielong77@aol.com <br>
+        Nick Laney, nicklan3y@gmail.com <br>
+        Alex Hutchinson, alexjwalters01@gmail.com <br>
+        Joanne Theobald, jotheob@gmail.com <br>
+        Chris Schafer, schafer78@msn.com <br>
+        Laurie Rigg, 	Laurie@laurierigg.com <br>
+        Carmen Albright, casaluminosa.montessori@gmail.com <br>
+        Colleen Burridge, colleenwyo@gmail.com <br>
+        Sandy Leotta, 4leottas@bresnan.net
+      </p></div>
+
+      <button class="collapsible" style="background-color:#fccde5">Vedauwoo Chapter</button>
+      <div class="content"><p>
+        Mary Hiney, mary.k.hiney@gmail.com <br>
+        Nita Tallent, nitatallent@gmail.com <br>
+        Venice Beske, vbeske@gmail.com <br>
+        Susan Nelson, susan.nelson2326@gmail.com <br>
+        Emily Madden, emilyjmadden@gmail.com <br>
+        Nancy Weidel, 1718daphne@gmail.com <br>
+        Carol Bilbrough, 	carol.bilbrough@gmail.com <br>
+        Amanda Lopez, alopez@acsd1.org <br>
+        Esther Gilman-Kehrer, egilmank@uwyo.edu <br>
+        Al Zerbe, ebrezla@hotmail.com <br>
+        Sarah Wright, s.wright.618@gmail.com <br>
+        Katie Wynne, katie.wynne7@gmail.com <br>
+        Casey Black, caseyjuneblack@gmail.com <br>
+        Carleigh Crouch, 	ccrouch121@gmail.com <br>
+        Kyler Smith, kylerrsmith30@gmail.com <br>
+        Dorothy Tuthill, 	dtuthill@uwyo.edu <br>
+        Grady Spencer, gradyspencer13@yahoo.com <br>
+        Jennie Lawrence, missjennae@yahoo.com <br>
+        Carlo Migliaccio, carlo.migliaccio@wyo.gov <br>
+        Dixie Brackman, dxebird7@yahoo.com <br>
+        Rachel Carr, 	withsisu1@gmail.com <br>
+        Bryon Lee, bryonlee87@gmail.com <br>
+        Ashley Quick, ashleyranaequick@gmail.com <br>
+        Meghan Brown, meghrose@gmail.com <br>
+        Nicole Foss, commonoutdoorground@gmail.com <br>
+        John Kraft, jpk2532@gmail.com <br>
+        Josh Chrysler, chrysler.joshua@gmail.com <br>
+        Ella Bishop-Heil, ella.bishopheil@pathfinderranches.com <br>
+        Kurt Warmbier, kurt.warmbier@gmail.com <br>
+        Rebecca O'Leary, rebecca.oleary5@gmail.com <br>
+        Kevin Ramler, kevindeanramler@gmail.com <br>
+        Kristina Behringer, kilikinastina@gmail.com <br>
+        Sarah Delgado, sdelgad2@uwyo.edu <br>
+        Chris Folsom, chris.folsomak@gmail.com
+      </p></div>
+
+      <button class="collapsible" style="background-color:#d9d9d9">Wind River Chapter</button>
+      <div class="content"><p>
+       Jaci Harkink, jacihark@gmail.com <br>
+        Morgan Schubring, mnschubring@yahoo.com <br>
+        Macy Watson, 	macy.a.watson@gmail.com <br>
+        Era Aranow, eraaranow@gmail.com <br>
+        Lennie Poitras, poitrassl@msn.com
+      </p></div>
+    </div>
+  </div>
+
+  <!-- Collapsible JS -->
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    for (var i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+        }
+      });
+    }
+  </script>
+
+  <!-- Map JS -->
+  <script type="module" src="map.js"></script>
+  <script type="text/javascript" src="obj.js"></script>
+</body>
+</html>
