@@ -82,24 +82,19 @@
     }
 
     /* ===== RESPONSIVE ===== */
-    @media (max-width: 800px) {
-      .container {
-        flex-direction: column; /* stack map above sidebar */
-        min-height: 100dvh;
-      }
+   @media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
 
-      .sidebar {
-        width: 100%;  /* full width below map */
-        flex: 1;         
-        height: auto;
-        box-shadow: none;
-      }
+  .sidebar {
+    width: 100%;
+  }
 
-      #map {
-        height: 60vh; /* smaller map height on mobile */
-        flex: none;        
-      }
-    }
+  #map {
+    flex: 1;
+  }
+}
   </style>
 </head>
 
