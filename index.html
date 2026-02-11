@@ -22,7 +22,7 @@
     .container {
       display: flex;
       flex-direction: row-reverse; /* sidebar right of map */
-      height: 100vh;       /* full viewport height */
+      height: 100dvh;       
     }
 
     /* Map styling */
@@ -85,16 +85,19 @@
     @media (max-width: 800px) {
       .container {
         flex-direction: column; /* stack map above sidebar */
+        min-height: 100dvh;
       }
 
       .sidebar {
-        width: 100%;           /* full width below map */
+        width: 100%;  /* full width below map */
+        flex: 1;         
         height: auto;
         box-shadow: none;
       }
 
       #map {
-        height: 60vh;          /* smaller map height on mobile */
+        height: 60vh; /* smaller map height on mobile */
+        flex: none;        
       }
     }
   </style>
